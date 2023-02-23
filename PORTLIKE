@@ -1,0 +1,22 @@
+#!/bin/sh
+
+    echo "Root check"
+if [ $(whoami) = 'root' ]; then
+    echo "Root is enabled, installing is continued"
+else
+    echo "Root is not enabled, installing is stoped"
+    exit
+fi
+    echo "Download package process"
+    git clone https://github.com/NothingLinuxMirror/CMake.git
+    echo "Building package"
+    cd ./CMake
+    ./bootstrap --prefix=/usr
+    make
+    make install
+    echo "Cleaning"
+    rm -rf ./CMake
+    echo "Cleaned"
+    echo "CMake Installed!"
+    
+    
